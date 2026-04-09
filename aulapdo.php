@@ -15,6 +15,13 @@ $com = $pdo->prepare($squ);
 $com ->execute();
 
 $usuarios = $com->fetchAll(PDO::FETCH_ASSOC);
+
+// clientes
+$sqc = "select * from clientes";
+$cma = $pdo->prepare($sqc);
+$cma ->execute();
+
+$clientes = $cma->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -70,6 +77,25 @@ $usuarios = $com->fetchAll(PDO::FETCH_ASSOC);
         <td><?= $usuario['tipo']?"Adm":"comum" ?></td>
         <td><?= $usuario['ativo']?"Sim":"Não" ?></td>
         <td><?= $usuario['primeiro_login']?"Sim":"Não" ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+
+    <br>
+    <h2>lista de clientes</h2>
+    <table border="1" cellpadding = 10>
+        <tr>
+        <th>ID</th>
+        <th>Usuario_ID</th>
+        <th>Telefone</th>
+        <th>CPF</th>
+        </tr>
+    <?php  foreach($clientes as $cliente): ?>
+        <tr>
+        <td><?= $cliente['id']?></td>
+        <td><?= $cliente['usuario_id']?></td>
+        <td><?= $cliente['telefone']?></td>
+        <td><?= $cliente['cpf']?></td>
         </tr>
     <?php endforeach; ?>
     </table>
