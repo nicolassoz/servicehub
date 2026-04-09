@@ -1,6 +1,6 @@
 <?php
 include_once "config/conexao.php";
-
+// serviços
 $sql = "select * from servicos";
 $cmd = $pdo->prepare($sql);
 $cmd ->execute();
@@ -8,7 +8,15 @@ $cmd ->execute();
 $servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
 // var_dump($servicos);
+
+// usuarios
+$squ = "select * from usuarios";
+$com = $pdo->prepare($squ);
+$com ->execute();
+
+$usuarios = $com->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 
 <!DOCTYPE html>
@@ -36,6 +44,32 @@ $servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
         <td><?= $servico['descricao']?></td>
         <td><?= $servico['preco']?></td>
         <td><?= $servico['descontinuado']?"Sim":"Não" ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+
+
+    <br>
+    <h2>lista de usuarios</h2>
+    <table border="1" cellpadding = 10>
+        <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>senha</th>
+        <th>Tipo</th>
+        <th>Ativo</th>
+        <th>Primeiro login</th>
+        </tr>
+    <?php  foreach($usuarios as $usuario): ?>
+        <tr>
+        <td><?= $usuario['id']?></td>
+        <td><?= $usuario['nome']?></td>
+        <td><?= $usuario['email']?></td>
+        <td><?= $usuario['senha']?></td>
+        <td><?= $usuario['tipo']?"Adm":"comum" ?></td>
+        <td><?= $usuario['ativo']?"Sim":"Não" ?></td>
+        <td><?= $usuario['primeiro_login']?"Sim":"Não" ?></td>
         </tr>
     <?php endforeach; ?>
     </table>
