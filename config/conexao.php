@@ -1,12 +1,12 @@
 <?php
 
-$host = "10.91.47.41";
+$host = "10.91.47.48";
 $db = "servicehubdb01";
 $user = "root";
 $pass = "P@ssw0rd";
 
-try(
+try{
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8",$user,$pass);
-)catch(PDOException $e){
-    die("Erro na conexão: ".$e->getMessagem());
+}catch(PDOException $e){
+    die("Erro na conexão: ".$e->getMessage());
 }
