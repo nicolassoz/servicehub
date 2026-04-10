@@ -34,6 +34,14 @@ $clientes = $cma->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     
+
+        <form action="resform.php" method="post">
+            <input type="text" name="txtid" id="">
+            <button type="submit">Enviar</button>
+        </form>
+        
+<hr>
+
     <h2>lista de serviços</h2>
     <table border="1" cellpadding = 10>
         <tr>
@@ -100,11 +108,6 @@ $clientes = $cma->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
     </table>
 
-    <hr>
-        <form action="resform.php" method="post">
-            <input type="text" name="txtid" id="">
-            <button type="submit">Enviar</button>
-        </form>
-
+    
 </body>
 </html>

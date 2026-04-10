@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']=="POST")
 
 if($_SERVER['REQUEST_METHOD']=="GET")
     {
-        echo "chamado pela url ou formulario method='get'";
+        echo "<h3>chamado pela url ou formulario method='get'</h3>";
         
         $idViaGet = $_GET['txtid'];
         $sql = 'select * from servicos where id = :id';
@@ -36,4 +36,4 @@ if($_SERVER['REQUEST_METHOD']=="GET")
 // $serve = $cmd->fetch(PDO::FETCH_ASSOC);
 // var_dump($serve);
 
-// ?>
+?>
