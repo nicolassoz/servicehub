@@ -101,7 +101,7 @@ include "includes/menu.php";
     </div>
   </section>
 
-  <section id="clientes" class="mt-5">
+  <section id="clientes" class="mt-5 bg-light pb-5">
     <h2 class="text-center mb-4">Principais Clientes</h2>
     <div class="row text-center">
       <?php foreach($clientes as $cliente):?>
