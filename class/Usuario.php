@@ -78,6 +78,23 @@ class Usuario{
         $this->ativo = $primeiro_login;
     }
     // métodos (functions) - representam os RFs do projetos
+    // evetuar login
+    public static function efetuarLogin(string $email, string $senha):array
+    {
+        $sql = "select * from usuarios where email = :email and ativo = b'1'";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":email",$email);
+        $cmd->execute();
+        $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+        if($dados && password_verify($senha,$dados['senha']))
+            {
+                return $dados;
+            }
+            else
+                {
+                    return $dados = [];
+                }
+    }
 
 
 }

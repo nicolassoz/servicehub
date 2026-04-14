@@ -1,3 +1,11 @@
+<?php 
+require "class/Usuario.php";
+
+
+var_dump( Usuario::efetuarLogin('admin@servicehub.com','admin123'));
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
