@@ -12,10 +12,10 @@ error_reporting(E_ALL);
     $preco = $_POST['txtpreco'];
 
     $sql = "insert servicos (nome, descricao, preco) values(:nome, :descricao, :preco)";
-    $cmd = $pdo->prepare($sql);
+    $cmd =  obterPdo()->prepare($sql);
     $cmd->execute([':nome'=>$nome, 'descricao'=>$descricao, 'preco'=>$preco]);
 
-    $id = $pdo->lastInsertId();
+    $id =  obterPdo()->lastInsertId();
 
     if(isset($id))
         {
