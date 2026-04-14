@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 
     $sql = "insert servicos (nome, sobrenome, turma) values(:nome, :sobrenome, :turma)";
     $cmd = $pdo->prepare($sql);
-    $cmd->execute([':nome'=>$nome, 'sobrenome'=>$sobrenome, 'turma'=>$turma],);
+    $cmd->execute([':nome'=>$nome, ':sobrenome'=>$sobrenome, ':turma'=>$turma]);
 
     $id = $pdo->lastInsertId();
 
@@ -26,12 +26,12 @@ error_reporting(E_ALL);
             echo "falha ao cadastrado o aluno.";
         }
 
-        $sql = "select * from alunos";
+        
+ }
+$sql = "select * from alunos";
         $cmd = $pdo->prepare($sql);
         $cmd ->execute();
         $alunos = $cmd->fetchAll(PDO::FETCH_ASSOC);
- }
-
 ?>
 
 
