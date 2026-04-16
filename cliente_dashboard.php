@@ -1,3 +1,13 @@
+<?php 
+session_start();
+// apenas um comando dentro do if não pressisa de {}
+if(!isset($_SESSION['usuario_id']) || $_SESSION["tipo"]!=2)
+    header("location: login.php");
+
+  include "includes/header.php";
+  include "includes/menu.php"
+?>
+
 <main class="container mt-5">
   <h2>Bem-vindo,</h2>
   <p><a href="logout.php" class="btn btn-danger btn-sm">Sair</a></p>
@@ -26,3 +36,7 @@
     </tbody>
   </table>
 </main>
+
+<?php 
+include "includes/footer.php";
+?>
