@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD']==="POST")
       if(count($usuario)>0)
         {
           $_SESSION['usuario_id'] = $usuario['id'];
-          $_SESSION['nome_id'] = $usuario['nome'];
+          $_SESSION['nome'] = $usuario['nome'];
           $_SESSION['tipo'] = $usuario['tipo'];
         
           if($usuario['primeiro_login'] == 1)
