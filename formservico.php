@@ -1,10 +1,14 @@
 <?php 
 
+require_once "config/conexao.php";
 
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
 
  if($_SERVER['REQUEST_METHOD']=="POST")
  {
-    require_once "config/conexao.php";
+    
     $nome = $_POST['txtnome'];
     $descricao = $_POST['txtdescricao'];
     $preco = $_POST['txtpreco'];
@@ -24,6 +28,11 @@
             echo "falha ao cadastrado o serviço.";
         }
  }
+
+$sql = "select * from servicos";
+$cmd = obterPdo()->prepare($sql);
+$cmd->execute();
+$servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -45,5 +54,15 @@
     <input type="text" name="txtpreco" id="">
     <button type="submit">Gravar</button>
     </form>
+    <h2>listra de serviços</h2>
+    <table border="1" cellpadding = 10>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </table>
 </body>
 </html>
