@@ -1,6 +1,13 @@
 <?php 
 session_start(); // iniciar a sessão ou atualizar a sessão aberta
 
+// evitar acesso se já estiver logado
+if(isset($_SESSION['usuario_id']))
+  {
+    $destino = ($_SESSION['tipo']==1)?"admin_dashboard.php":"cliente_dashboard.php"; //estrutura do if ternário
+    header("location: $destino");
+  }
+
 require "class/Usuario.php";
 
 // var_dump( Usuario::efetuarLogin('admin@servicehub.com','admin123'));
