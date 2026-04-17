@@ -4,15 +4,10 @@
 
 require_once "class/Usuario.php";
 
-$usuario = new Usuario();
-$usuario->setNome('Milharino Santos');
-$usuario->setEmail('Mil@harino.sa');
-$usuario->setSenha('mI2026@TV');
-$usuario->setTipo(2);
-
-if($usuario->inserir())
+echo "<pre>";
+foreach (Usuario::listar() as $user)
     {
-        echo "usuário ".$usuario->getNome()." inserido com sucesso sob o ID".$usuario->getId();
+        echo $user['id']."-".$user['nome']."<br>";
     }
 
 ?>

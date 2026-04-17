@@ -115,4 +115,11 @@ class Usuario
         return false;
     }
 
+    // listar
+    public static function listar():array
+    {
+        $cmd = obterPdo()->query("select * from usuarios order by id desc");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
