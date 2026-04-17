@@ -79,7 +79,7 @@ class Usuario
     {
         return $this->primeiro_login;
     }
-    public function setPrimeiroLogin(string $primeiro_login)
+    public function setPrimeiroLogin(bool $primeiro_login)
     {
         $this->ativo = $primeiro_login;
     }
@@ -143,10 +143,29 @@ class Usuario
                 $this->setSenha($dados['senha']);
                 $this->setTipo($dados['tipo']);
                 $this->setAtivo($dados['ativo']);
-                $this->setPrimeiroLogin($dados['primeiro_login']);
+                $this->primeiro_login = $dados['primeiro_login'];
                 return true;
             }
         return false;
+    }
+    // atualizar
+    public function atualizar():bool
+    {
+        if(!$this->id) return false;
+        // var_dump($this->id);
+        // die();
+        
+        $sql = "UPDATE usuarios
+                set nome = :nome, email = :email, tipo = :tipo, ativo = :ativo, primeiro_login = :primeiro_login
+                WHERE id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":id", $this->id);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":email", $this->email);
+        $cmd->bindValue(":tipo", $this->tipo);
+        $cmd->bindValue(":ativo", $this->ativo, PDO::PARAM_BOOL);
+        $cmd->bindValue(":primeiro_login", $this->primeiro_login, PDO::PARAM_BOOL);
+        return $cmd->execute();
     }
 
 }
