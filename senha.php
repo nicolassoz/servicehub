@@ -4,12 +4,15 @@
 
 require_once "class/Usuario.php";
 
-$usuario = new Usuario;
-
-echo "<pre>";
-foreach (Usuario::listar() as $user)
+$usuario = new Usuario();
+    if($usuario->buscarPorId(31))
     {
-        echo $user['id']."-".$user['nome']."<br>";
+        echo "<pre>";
+        echo $usuario->getId()."-".$usuario->getNome()."<br>";
     }
+    else
+        {
+            echo "usuario não cadastrado";
+        }
 
 ?>

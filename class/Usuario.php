@@ -130,7 +130,7 @@ class Usuario
     // buscar por id
     public function buscarPorID(int $id):bool
     {
-        $sql = "SELECT * FROM usuario WHERE id = :id";
+        $sql = "SELECT * FROM usuarios WHERE id = :id";
         $cmd = obterPdo()->prepare($sql);
         $cmd->bindValue(":id",$id);
         $cmd->execute();
