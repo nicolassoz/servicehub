@@ -25,6 +25,11 @@ class Usuario
        return $this->id;
     }
 
+    private function setID(string $id)
+    {
+        $this->id = $id;
+    }
+
     public function getNome()
     {
         return $this->nome;
@@ -120,6 +125,28 @@ class Usuario
     {
         $cmd = obterPdo()->query("select * from usuarios order by id desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // buscar por id
+    public function buscarPorID(int $id):bool
+    {
+        $sql = "SELECT * FROM usuario WHERE id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":id",$id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0)
+            {
+                $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+                $this->setID($dados['id']);
+                $this->setNome($dados['nome']);
+                $this->setEmail($dados['email']);
+                $this->setSenha($dados['senha']);
+                $this->setTipo($dados['tipo']);
+                $this->setAtivo($dados['ativo']);
+                $this->setPrimeiroLogin($dados['primeiro_login']);
+                return true;
+            }
+        return false;
     }
 
 }

@@ -4,6 +4,8 @@
 
 require_once "class/Usuario.php";
 
+$usuario = new Usuario;
+
 echo "<pre>";
 foreach (Usuario::listar() as $user)
     {
