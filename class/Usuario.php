@@ -168,4 +168,17 @@ class Usuario
         return $cmd->execute();
     }
 
+    // atualiza senha
+    public function atualizarSenha(string $senhaHash):bool
+    {
+        if(!$this->id) return false;
+
+        $sql = "UPDATE usuarios SET senha = :senha WHERE id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":senha",$senhaHash);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        return $cmd->execute();
+    }
+
 }
