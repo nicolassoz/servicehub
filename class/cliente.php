@@ -9,4 +9,11 @@ class cliente
     private $usuario_id;
     private $telefone;
     private $cpf;
+    private $pdo;
+
+    // construtor
+    public function __construct()
+    {
+        $this->pdo = obterPdo();
+    }
 }
