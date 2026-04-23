@@ -108,4 +108,11 @@ class servico
         $cmd->bindValue(":descontinuado", $this->descontinuado);
         return $cmd->execute();
     }
+
+    // listar
+    public static function listar():array
+    {
+        $cmd = obterPdo()->query("select * from servicos ordem by id desc");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
