@@ -59,4 +59,21 @@ class cliente
         $this->cpf = $cpf;
     }
 
+    // inserir
+    public function inserir():bool
+    {
+        $sql = "INSERT clientes (usuario_id, telelfone, cpf) VALUES (:usuario_id, :telefone, :cpf)";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":usuario_id", $this->usuario_id);
+        $cmd->bindValue(":telefone", $this->telefone);
+        $cmd->bindValue(":cpf", $this->cpf);
+        if($cmd->execute())
+        {
+            $this->id = $this->pdo->lastInsertId();
+            return true;
+        }
+        
+        return false;
+    }
+
 }
