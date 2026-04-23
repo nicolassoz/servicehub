@@ -93,4 +93,19 @@ class servico
         
         return false;
     }
+
+    // atualizar
+    public function atualizar():bool
+    {
+        if(!$this->id) return false;
+
+        $sql = "UPDATE servicos set nome = :nome, descricao = :descricao, preco = :preco, descontinuado
+                 where id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":descricao", $this->descricao);
+        $cmd->bindValue(":preco", $this->preco);
+        $cmd->bindValue(":descontinuado", $this->descontinuado);
+        return $cmd->execute();
+    }
 }
