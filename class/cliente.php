@@ -79,6 +79,13 @@ class cliente
     // atualizar
     public function atualizar():bool
     {
-        if(!$this->id) return false
+        if(!$this->id) return false;
+
+        $sql = "UPDATE clientes set usuario_id = :usuario_id, telefone = :telefone, cpf = :cpf where id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":usuario_id", $this->usuario_id);
+        $cmd->bindValue(":telefone", $this->telefone);
+        $cmd->bindValue(":cpf", $this->cpf);
+        return $cmd->execute();
     }
 }
