@@ -21,5 +21,43 @@ class Solicitacao
     private $resposta_admin;
     private $endereco;
     
+
+    // construtor
+    public function __construct()
+    {
+        $this->pdo = obterPdo();
+    }
+
+    // getters / setters
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    private function setID(string $id)
+    {
+        $this->id = $id;
+    }
+
+    public function getClienteId()
+    {
+        return $this->cliente_id;
+    }
+
+    private function setClienteId(string $cliente_id)
+    {
+        $this->cliente_id = $cliente_id;
+    }
+
+    public function getDescricaoProblema()
+    {
+        return $this->descricao_problema;
+    }
+
+    private function setDescricaoProblema(string $descricao_problema)
+    {
+        $this->descricao_problema = $descricao_problema;
+    }
     
 }
