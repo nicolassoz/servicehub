@@ -74,4 +74,23 @@ class servico
     {
         $this->descontinuado = $descontinuado;
     }
+
+    // inserir
+    public function inserir():bool
+    {
+        $sql = "INSERT servicos (nome, descricao, preco, descontinuado)
+                 VALUES (:nome, :descricao, :preco, :descontinuado)";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":descricao", $this->descricao);
+        $cmd->bindValue(":preco", $this->preco);
+        $cmd->bindValue(":descontinuado", $this->descontinuado);
+        if($cmd->execute())
+        {
+            $this->id = $this->pdo->lastInsertId();
+            return true;
+        }
+        
+        return false;
+    }
 }
