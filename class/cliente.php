@@ -76,4 +76,9 @@ class cliente
         return false;
     }
 
+    // atualizar
+    public function atualizar():bool
+    {
+        if(!$this->id) return false
+    }
 }
