@@ -88,4 +88,11 @@ class cliente
         $cmd->bindValue(":cpf", $this->cpf);
         return $cmd->execute();
     }
+
+    // listar
+    public static function listar():array
+    {
+        $cmd = obterPdo()->query("select * from clientes ordem by id desc");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
