@@ -115,4 +115,31 @@ class servico
         $cmd = obterPdo()->query("select * from servicos ordem by id desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // listar ativos
+    // public static function listarAtivos():array
+    // {
+    //     $cmd = obterPdo()->query("select * from descontinuado ordem by id desc");
+    //     return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    // buscar por id
+    public function buscarPorId(int $id):bool
+    {
+        $sql = "SELECT * from servicos where id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":id", $this->$id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0)
+        {
+            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            $this->setID($dados['id']);
+            $this->setNome($dados['nome']);
+            $this->setDescricao($dados['descricao']);
+            $this->setDescontinuado($dados['decontinuado']);
+            return true;
+        }
+        
+        return false;
+    }
 }
