@@ -54,7 +54,7 @@ class cliente
         return $this->cpf;
     }
 
-    private function serCpf(string $cpf)
+    private function setCpf(string $cpf)
     {
         $this->cpf = $cpf;
     }
@@ -94,5 +94,25 @@ class cliente
     {
         $cmd = obterPdo()->query("select * from clientes ordem by id desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // buscar por id
+    public function buscarPorId(int $id):bool
+    {
+        $sql = "SELECT * from clientes where id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":id", $this->$id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0)
+        {
+            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            $this->setID($dados['id']);
+            $this->setUsuarioId($dados['usuario_id']);
+            $this->setTelefone($dados['telefone']);
+            $this->setCpf($dados['cpf']);
+            return true;
+        }
+        
+        return false;
     }
 }
