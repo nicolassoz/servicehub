@@ -59,5 +59,75 @@ class Solicitacao
     {
         $this->descricao_problema = $descricao_problema;
     }
+
+    public function getDataPreferida()
+    {
+        return $this->data_preferida;
+    }
+
+    private function setDataPreferida(string $data_preferida)
+    {
+        $this->data_preferida = $data_preferida;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    private function seStatus(string $status)
+    {
+        $this->status = $status;
+    }
     
+    public function getDataCad()
+    {
+        return $this->data_cad;
+    }
+
+    private function setDataCad(string $data_cad)
+    {
+        $this->data_cad = $data_cad;
+    }
+
+    public function getDataAtualizacao()
+    {
+        return $this->data_atualizacao;
+    }
+
+    private function setDataAtualizacao(string $data_atualizacao)
+    {
+        $this->data_atualizacao = $data_atualizacao;
+    }
+
+    public function getDataResposta()
+    {
+        return $this->data_resposta;
+    }
+
+    private function setDataResposta(string $data_resposta)
+    {
+        $this->data_resposta = $data_resposta;
+    }
+
+    public function getRespostaAdmin()
+    {
+        return $this->resposta_admin;
+    }
+
+    private function setRespostaAdmin(string $resposta_admin)
+    {
+        $this->resposta_admin = $resposta_admin;
+    }
+
+    public function getEndereco()
+    {
+        return $this->endereco;
+    }
+
+    private function setEndereco(string $endereco)
+    {
+        $this->endereco = $endereco;
+    }
+
 }
