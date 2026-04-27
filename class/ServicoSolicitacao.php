@@ -53,15 +53,15 @@ class ServicoSolicitacao
         $this->data_assoc = $data_assoc;
     }
 
-    // associar
-    public function associar(int $servico_id, int $solicitacao_id): bool
-    {
-        ;
-    }
+    // // associar
+    // public function associar(int $servico_id, int $solicitacao_id): bool
+    // {
+    //     ;
+    // }
 
-    // listar servico de solicitacoes
-    public function listarServicosDaSolicitacao(int $solicitacao_id): array
-    {
-        ;
-    }
+    // // listar servico de solicitacoes
+    // public function listarServicosDaSolicitacao(int $solicitacao_id): array
+    // {
+    //     ;
+    // }
 }

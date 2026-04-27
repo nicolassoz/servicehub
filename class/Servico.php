@@ -117,11 +117,11 @@ class servico
     }
 
     // listar ativos
-    // public static function listarAtivos():array
-    // {
-    //     $cmd = obterPdo()->query("select * from descontinuado ordem by id desc");
-    //     return $cmd->fetchAll(PDO::FETCH_ASSOC);
-    // }
+    public static function listarAtivos():array
+    {
+        $cmd = obterPdo()->query("select * from sevicos ordem by descontinuado('1') desc");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // buscar por id
     public function buscarPorId(int $id):bool
@@ -144,4 +144,5 @@ class servico
     }
 
     // excluir
+    public function excluir(int $id):bool
 }
