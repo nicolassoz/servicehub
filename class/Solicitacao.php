@@ -195,4 +195,16 @@ class Solicitacao
         return false;
     }
 
+    // responder
+    public function responder(string $resposta, int $status):bool
+    {
+
+    }
+
+    // atuailzar status
+    public function atualizarStatus(int $status):bool
+    {
+        
+    }
+
 }
