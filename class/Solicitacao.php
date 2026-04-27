@@ -163,7 +163,7 @@ class Solicitacao
     }
 
     // listar por cliente
-    public static function listarPorCliente():array
+    public static function listarPorCliente(int $cliente_id):array
     {
         $cmd = obterPdo()->query("select * from solicitacoes ordem by cliente_id desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
