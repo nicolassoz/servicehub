@@ -28,7 +28,7 @@ class ServicoSolicitacao
         return $this->servico_id;
     }
 
-    private function setServicoId(string $servico_id)
+    private function setServicoId(int $servico_id)
     {
         $this->servico_id = $servico_id;
     }
@@ -38,9 +38,9 @@ class ServicoSolicitacao
         return $this->solicitacao_id;
     }
 
-    private function setSolicitacaoId(string $solicitacao_id)
+    private function setSolicitacaoId(int $solicitacao_id)
     {
-        $this->solicitacao_id = $solicitacao_id;
+        $this->servico_id = $solicitacao_id;
     }
 
     public function getDataAssoc()
@@ -48,20 +48,21 @@ class ServicoSolicitacao
         return $this->data_assoc;
     }
 
-    private function setDataAssoc(string $data_assoc)
+    
+
+    //  associar
+    public static function associar(int $servico_id, int $solicitacao_id): bool
     {
-        $this->data_assoc = $data_assoc;
+        $sql = "insert servico_solicitacao values(:servico_id, :solicitacao_id, default)";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":servico_id", $servico_id);
+        $cmd->bindValue(":sorlicitacao_id", $solicitacao_id);
+        return $cmd->execute();
     }
 
-    // // associar
-    // public function associar(int $servico_id, int $solicitacao_id): bool
-    // {
-    //     ;
-    // }
-
-    // // listar servico de solicitacoes
-    // public function listarServicosDaSolicitacao(int $solicitacao_id): array
-    // {
-    //     ;
-    // }
+    //  listar servico de solicitacoes
+    public function listarServicosDaSolicitacao(int $solicitacao_id): array
+    {
+        
+    }
 }

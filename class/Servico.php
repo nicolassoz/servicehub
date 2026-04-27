@@ -143,6 +143,6 @@ class servico
         return false;
     }
 
-    // excluir
-    public function excluir(int $id):bool
+    // // excluir
+    // public function excluir(int $id):bool
 }
