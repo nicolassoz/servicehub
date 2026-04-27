@@ -134,17 +134,12 @@ class Solicitacao
     // inserir
     public function inserir():bool
     {
-        $sql = "INSERT solicitacoes (cliente_id, descricao_problema, data_preferida, status, data_cad, data_atualizacao, data_resposta, resposta_admin, endereco)
-                 VALUES (:cliente_id, :descricao_problema, :data_preferida, :status, :data_cad, :data_atualizacao, :data_resposta, :resposta_admin, :endereco)";
+        $sql = "INSERT solicitacoes (cliente_id, descricao_problema, data_preferida, status, endereco)
+                 VALUES (:cliente_id, :descricao_problema, :data_preferida, 1, :endereco)";
         $cmd = obterPdo()->prepare($sql);
         $cmd->bindValue(":cliente_id", $this->cliente_id);
         $cmd->bindValue(":descricao_problema", $this->descricao_problema);
         $cmd->bindValue(":data_preferida", $this->data_preferida);
-        $cmd->bindValue(":status", $this->status);
-        $cmd->bindValue(":data_cad", $this->data_cad);
-        $cmd->bindValue(":data_atualizacao", $this->data_atualizacao);
-        $cmd->bindValue(":data_resposta", $this->data_resposta);
-        $cmd->bindValue(":resposta_admin", $this->resposta_admin);
         $cmd->bindValue(":endereco", $this->endereco);
         if($cmd->execute())
         {
