@@ -13,6 +13,7 @@ class ServicoSolicitacao
     private $servico_id;
     private $solicitacao_id;
     private $data_assoc;
+    private $pdo;
 
     // construtor
     public function __construct()
