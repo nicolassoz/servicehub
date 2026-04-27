@@ -56,13 +56,20 @@ class ServicoSolicitacao
         $sql = "insert servico_solicitacao values(:servico_id, :solicitacao_id, default)";
         $cmd = obterPdo()->prepare($sql);
         $cmd->bindValue(":servico_id", $servico_id);
-        $cmd->bindValue(":sorlicitacao_id", $solicitacao_id);
+        $cmd->bindValue(":solicitacao_id", $solicitacao_id);
         return $cmd->execute();
     }
 
     //  listar servico de solicitacoes
-    public function listarServicosDaSolicitacao(int $solicitacao_id): array
+    public static function listarServicosDaSolicitacao(int $solicitacao_id): array
     {
-        
+        $sql = "SELECT se. *, ss.data_assoc
+                fROM servico_solicitacao ss
+                INNER JOIN servicos se ON se.id = ss.servico_id
+                WHERE ss.solicitacao_id = :solicitacao_id";
+            $cmd = obterPdo()->prepare($sql);
+            $cmd->bindValue(":solicitacao_id", $solicitacao_id, PDO::PARAM_INT);
+            $cmd->execute();
+            return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 }
