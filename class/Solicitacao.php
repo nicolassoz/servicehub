@@ -162,4 +162,11 @@ class Solicitacao
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // listar por cliente
+    public static function listarPorCliente():array
+    {
+        $cmd = obterPdo()->query("select * from solicitacoes ordem by cliente_id desc");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
