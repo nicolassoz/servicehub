@@ -169,4 +169,30 @@ class Solicitacao
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // buscar por id
+    public function buscarPorId(int $id):bool
+    {
+        $sql = "SELECT * from solicitacoes where id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":id", $this->$id);
+        $cmd->execute();
+        if($cmd->rowCount() > 0)
+        {
+            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            $this->setID($dados['id']);
+            $this->setClienteId($dados['cliente_id']);
+            $this->setDescricaoProblema($dados['descricao_problema']);
+            $this->setDataPreferida($dados['data_preferida']);
+            $this->seStatus($dados['status']);
+            $this->setDataCad($dados['data_cad']);
+            $this->setDataAtualizacao($dados['data_atualizacao']);
+            $this->setDataResposta($dados['data_resposta']);
+            $this->setRespostaAdmin($dados['resposta_admin']);
+            $this->setEndereco($dados['endereco']);
+            return true;
+        }
+        
+        return false;
+    }
+
 }
