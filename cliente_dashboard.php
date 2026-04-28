@@ -51,6 +51,7 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
     <thead>
       <tr>
         <th>ID</th>
+        <th>Serviços</th>
         <th>Status</th>
         <th>Data</th>
         <th>Ação</th>
@@ -58,7 +59,7 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
     </thead>
     <tbody>
       <!-- percorre todas as solicitaçoes retornadas no banco -->
-          <?php foreach($solicitacoes as $s)?>
+          <?php foreach($solicitacoes as $s):?>
           <tr>
             <!-- exibe o id da solicitação -->
             <td><?= $s["id"] ?></td>
@@ -78,18 +79,18 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
           <?php statusTexto($s["status"])?>
 
           <td>
-           <?= date("d/mY H:i", strtotime($s["date_cad"])) ?>
+           <?= date("d/m/Y H:i", strtotime($s["date_cad"])) ?>
           </td>
 
           <td>
             <!-- link para ver os detalhe da solicitações -->
-            <a href="clientes_detalhes.php?id=<?= $s["id"] ?>">
+            <a href="clientes_detalhes.php?id=<?= $s["id"] ?>" class="btn btn-primary btn-sm ">
           </td>
           <td>
             <a href="cliente_detalhes.php?id=" class="btn btn-primary btn-sm">Detalhes</a>
           </td>
         </tr>
-        
+      <?php endforeach;?>  
     </tbody>
   </table>
 </main>
