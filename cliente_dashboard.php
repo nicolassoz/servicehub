@@ -57,15 +57,39 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
       </tr>
     </thead>
     <tbody>
-   
-          <td></td>
-         
-          <td></td>
-          <td></td>
+      <!-- percorre todas as solicitaçoes retornadas no banco -->
+          <?php foreach($solicitacoes as $s)?>
+          <tr>
+            <!-- exibe o id da solicitação -->
+            <td><?= $s["id"] ?></td>
+          </tr>
+          
+          <td>
+            <!-- divide a lista de serviços em um array -->
+            <?php $lista = explode(",", $s["servicos"]);
+            // percorre cada serviço da solicidação
+            foreach($lista as $nomeServico)
+            {
+              // htmlspecialchars evita execução de codigo HTML/JS malicioso
+              echo '<span class="badge bg-primary me-1 mb-1">'.htmlspecialchars($nomeServico).'</span>';
+            }?>
+          </td>
+          <!-- exibe o status em formato de texto usando função -->
+          <?php statusTexto($s["status"])?>
+
+          <td>
+           <?= date("d/mY H:i", strtotime($s["date_cad"])) ?>
+          </td>
+
+          <td>
+            <!-- link para ver os detalhe da solicitações -->
+            <a href="clientes_detalhes.php?id=<?= $s["id"] ?>">
+          </td>
           <td>
             <a href="cliente_detalhes.php?id=" class="btn btn-primary btn-sm">Detalhes</a>
           </td>
         </tr>
+        
     </tbody>
   </table>
 </main>
