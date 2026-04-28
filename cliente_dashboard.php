@@ -11,6 +11,32 @@ require_once "class/cliente.php";
 if(!isset($_SESSION['usuario_id']) || $_SESSION["tipo"]!=2)
     header("location: login.php");
 
+// objeto da classe cliente
+$cliente = new cliente;
+
+// buscar os dados do cliente usando o ID do usuario logado
+if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
+  {
+    // se nao encontrar o cliente encerra a execução
+    die("cliente não encontrado");
+  }
+
+  // consulta sql para buscar as solicitações do cliente
+  $sql = "SELECT s.id, s.status, s.data_cad GROUP_CONCAT(se.nome SEPARADOR '.')AS servicos from solicitacoes s 
+  INNER JOIN servico_solicitacoes ss ON ss.solicitacoes_id 
+  where s.cliente_id=?
+  GROUP BY s.id, s.status, s.data_cad 
+          ORDER BY s.data_cad DESC";
+
+  // preparar consulta
+  $stmt = obterPdo()->prepare($sql);
+  // ------ $cmd = obterPdo() -> prepare($sql);
+  // executar
+  $stmt->execute([$cliente->getId()]);
+  // ----- $cmd->execute();
+
+  $solicitacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
   include "includes/header.php";
   include "includes/menu.php"
 ?>
