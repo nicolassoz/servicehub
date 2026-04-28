@@ -70,7 +70,7 @@ class cliente
     {
         $sql = "INSERT clientes (usuario_id, telelfone, cpf) VALUES (:usuario_id, :telefone, :cpf)";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":usuario_id", $this->usuario_id);
+        $cmd->bindValue(":usuario_id", $this->usuario_id, PDO::PARAM_INT);
         $cmd->bindValue(":telefone", $this->telefone);
         $cmd->bindValue(":cpf", $this->cpf);
         if($cmd->execute())
@@ -87,9 +87,10 @@ class cliente
     {
         if(!$this->id) return false;
 
-        $sql = "UPDATE clientes set usuario_id = :usuario_id, telefone = :telefone, cpf = :cpf where id = :id";
+        $sql = "UPDATE clientes set telefone = :telefone, cpf = :cpf 
+                where id = :id";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":usuario_id", $this->usuario_id);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
         $cmd->bindValue(":telefone", $this->telefone);
         $cmd->bindValue(":cpf", $this->cpf);
         return $cmd->execute();
@@ -107,15 +108,15 @@ class cliente
     {
         $sql = "SELECT * from clientes where id = :id";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":id", $this->$id);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
             $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->setID($dados['id']);
-            $this->setUsuarioId($dados['usuario_id']);
-            $this->setTelefone($dados['telefone']);
-            $this->setCpf($dados['cpf']);
+            $this->id = $dados['id'];
+            $this->usuario_id = $dados['usuario_id'];
+            $this->telefone = $dados['telefone'];
+            $this->cpf = $dados['cpf'];
             return true;
         }
         
@@ -125,17 +126,17 @@ class cliente
     // buscar por usuario
     public function buscarPorCliente(int $usuario_id):bool
     {
-        $sql = "SELECT * from clientes where usuario_id = :usuario_id";
+        $sql = "SELECT * from clientes where usuario_id = :usuario_id LIMIT 1";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":usuario_id", $this->$usuario_id);
+        $cmd->bindValue(":usuario_id", $usuario_id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
             $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->setID($dados['id']);
-            $this->setUsuarioId($dados['usuario_id']);
-            $this->setTelefone($dados['telefone']);
-            $this->setCpf($dados['cpf']);
+            $this->id = $dados['id'];
+            $this->usuario_id = $dados['usuario_id'];
+            $this->telefone = $dados['telefone'];
+            $this->cpf = $dados['cpf'];
             return true;
         }
         

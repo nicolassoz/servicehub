@@ -134,10 +134,10 @@ class Solicitacao
     // inserir
     public function inserir():bool
     {
-        $sql = "INSERT solicitacoes (cliente_id, descricao_problema, data_preferida, status, endereco)
+        $sql = "INSERT INTO solicitacoes (cliente_id, descricao_problema, data_preferida, status, endereco)
                  VALUES (:cliente_id, :descricao_problema, :data_preferida, 1, :endereco)";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":cliente_id", $this->cliente_id);
+        $cmd->bindValue(":cliente_id", $this->cliente_id, PDO::PARAM_INT);
         $cmd->bindValue(":descricao_problema", $this->descricao_problema);
         $cmd->bindValue(":data_preferida", $this->data_preferida);
         $cmd->bindValue(":endereco", $this->endereco);
@@ -153,14 +153,16 @@ class Solicitacao
     // listar
     public static function listar():array
     {
-        $cmd = obterPdo()->query("select * from solicitacoes ordem by id desc");
+        $cmd = obterPdo()->query("select * from solicitacoes ordem by data_cad desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // listar por cliente
     public static function listarPorCliente(int $cliente_id):array
     {
-        $cmd = obterPdo()->query("select * from solicitacoes ordem by cliente_id desc");
+        $cmd = obterPdo()->prepare("select * from solicitacoes where cliente_id = :cliente_id ORDER BY data_cad desc");
+        $cmd->bindValue(":cliente_id", $cliente_id, PDO::PARAM_INT);
+        $cmd->execute();
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -169,7 +171,7 @@ class Solicitacao
     {
         $sql = "SELECT * from solicitacoes where id = :id";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":id", $this->$id);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
@@ -190,16 +192,40 @@ class Solicitacao
         return false;
     }
 
-    // // responder
-    // public function responder(string $resposta, int $status):bool
-    // {
+    // responder
+    public function responder(string $resposta, int $status):bool
+    {
+        if (!$this->id) return false;
+        $sql = "UPDATE solicitacoes 
+            SET resposta_admin = :resposta,
+                status = :status,
+                data_resposta = NOW(),
+                data_atualizacao = NOW()
+            WHERE id = :id";
 
-    // }
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":resposta", $resposta);
+        $cmd->bindValue(":status", $status, PDO::PARAM_INT);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
 
-    // // atuailzar status
-    // public function atualizarStatus(int $status):bool
-    // {
+        return $cmd->execute();
+    }
 
-    // }
+    // atuailzar status
+    public function atualizarStatus(int $status):bool
+    {
+        if (!$this->id) return false;
+
+        $sql = "UPDATE solicitacoes 
+                SET status = :status,
+                    data_atualizacao = NOW()
+                WHERE id = :id";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":status", $status, PDO::PARAM_INT);
+        $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        return $cmd->execute();
+    }
 
 }
