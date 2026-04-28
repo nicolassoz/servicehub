@@ -1,5 +1,12 @@
 <?php 
 session_start();
+
+require_once "config/conexao.php";
+
+require_once "includes/funcoes.php";
+
+require_once "class/cliente.php";
+
 // apenas um comando dentro do if não pressisa de {}
 if(!isset($_SESSION['usuario_id']) || $_SESSION["tipo"]!=2)
     header("location: login.php");
@@ -9,7 +16,7 @@ if(!isset($_SESSION['usuario_id']) || $_SESSION["tipo"]!=2)
 ?>
 
 <main class="container mt-5">
-  <h2>Bem-vindo,</h2>
+  <h2>Bem-vindo,<strong><?= $_SESSION['nome'] ?></strong> </h2>
   <p><a href="logout.php" class="btn btn-danger btn-sm">Sair</a></p>
   <a href="cliente_perfil.php" class="btn btn-warning btn-sm">Meu Perfil</a>
   <h4 class="mt-4">Minhas Solicitações</h4>
