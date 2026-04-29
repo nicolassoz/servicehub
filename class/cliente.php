@@ -133,10 +133,10 @@ class cliente
         if($cmd->rowCount() > 0)
         {
             $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->id = $dados['id'];
-            $this->usuario_id = $dados['usuario_id'];
-            $this->telefone = $dados['telefone'];
-            $this->cpf = $dados['cpf'];
+            $this->setID($dados['id']);
+            $this->setUsuarioId($dados['usuario_id']);
+            $this->setTelefone($dados['telefone']);
+            $this->setCpf($dados['cpf']);
             return true;
         }
         

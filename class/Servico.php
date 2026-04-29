@@ -119,7 +119,7 @@ class servico
     // listar ativos
     public static function listarAtivos():array
     {
-        $cmd = obterPdo()->query("select * from sevicos ordem by descontinuado('1') desc");
+        $cmd = obterPdo()->query("SELECT * FROM sevicos WHERE descontinuado('0') ORDEM BY nome ASC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
