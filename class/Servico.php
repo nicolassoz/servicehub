@@ -112,14 +112,25 @@ class servico
     // listar
     public static function listar():array
     {
-        $cmd = obterPdo()->query("select * from servicos ordem by id desc");
+        $cmd = obterPdo()->query("select * from servicos order by id desc");
+        // $sql = "SELECT s.id, s.descontinuado,
+        //         u.nome AS servico_nome,
+        //         u.preco as preco,
+        // FROM solicitacoes s
+        // INNER JOIN servico_id c on c.id = s.servico_id
+        // INNER JOIN usuarios u ON u.id = c.usuario_id
+        // INNER JOIN servico_solicitacao ss on ss.solicitacao_id = s.id
+        // INNER JOIN servicos se on se.id = ss.servico_id
+        // GROUP BY s.id, s.nome, s.preco, u.descontinuado, u.acao
+        // ORDER BY s.descontinuado DESC";
+        // $cmd = obterPdo()->query($sql);
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // listar ativos
     public static function listarAtivos():array
     {
-        $cmd = obterPdo()->query("SELECT * FROM sevicos WHERE descontinuado('0') ORDEM BY nome ASC");
+        $cmd = obterPdo()->query("SELECT * FROM servicos WHERE descontinuado=b'0' ORDER BY nome ASC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 

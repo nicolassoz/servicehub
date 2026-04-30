@@ -51,12 +51,12 @@ class ServicoSolicitacao
     
 
     //  associar
-    public static function associar(int $servico_id, int $solicitacao_id): bool
+    public function associar(): bool
     {
         $sql = "insert servico_solicitacao values(:servico_id, :solicitacao_id, default)";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":servico_id", $servico_id);
-        $cmd->bindValue(":solicitacao_id", $solicitacao_id);
+        $cmd->bindValue(":servico_id", $this->servico_id);
+        $cmd->bindValue(":solicitacao_id", $this->solicitacao_id);
         return $cmd->execute();
     }
 

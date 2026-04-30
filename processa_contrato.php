@@ -29,7 +29,7 @@ $endereco = filter_input(INPUT_POST,'endereco', FILTER_UNSAFE_RAW);
 $descricao = filter_input(INPUT_POST,'descricao', FILTER_UNSAFE_RAW);
 $data_preferida = filter_input(INPUT_POST,'data_preferida', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $cpf = preg_replace('/\D/','',$_POST['cpf'] ?? "");
-$servicos_ids = $_POST['servicos_id'] ?? []; // array de servicos
+$servicos_ids = $_POST['servicos_ids'] ?? []; // array de servicos
 
 // validação dos serviços:
 if(!is_array($servicos_ids))
@@ -92,7 +92,12 @@ if($data_preferida)
                     header("location: contratar.php?erro=A data não pode ser anterior a hoje.");
                     exit();
                 }
-    }
+               
+} 
+try
+{
+                
+    
 // verificar se o usuário existe
 $usuarioBanco = new Usuario();
 if($usuarioBanco->buscarPorEmail($email))
@@ -128,7 +133,7 @@ if($cliente->buscarPorCliente($usuario_id)==false)
        if(!$cliente->inserir())
         {
             header("location: contratar.php?erro=Erro ao cadastrar o cliente.");
-                    exit();
+                exit();
         }
     }
 $cliente_id = $cliente->getId();
@@ -142,7 +147,28 @@ $solicitacao->setClienteId($endereco);
 if(!$solicitacao->inserir())
     {
        header("location: contratar.php?erro=Erro ao cadastrar a solicitação.");
-                    exit();
+            exit();
     }
 $solicitacao_id = $solicitacao->getId();
 // associar os serviços a solicitação.
+
+foreach($servicos_validos as $servico_id)
+    {
+        $assoc = new ServicoSolicitacao();
+        $assoc->setServicoId($servico_id);
+        $assoc->setSolicitacaoId($solicitacao_id);
+        if(!$assoc->associar())
+            {
+                header("location: contratar.php?erro=Erro ao veicular serviço.");
+                exit();
+            }
+    }
+    header("location: contratar.php?sucesso=1");
+}
+catch(Exception $e)
+{
+    
+       header("location: contratar.php?erro=Erro ao processar a solicitação.".$e->getMessage());
+            exit();
+    
+}
