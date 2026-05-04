@@ -154,6 +154,12 @@ class servico
         return false;
     }
 
-    // // excluir
-    // public function excluir(int $id):bool
+    // excluir
+    public static function excluir(int $id):bool
+    {
+        $sql = "UPDATE servicos SET descontinuado=b'1' WHERE id = :id";
+        $cmd = obterPdo()->prepare($sql);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
+        return $cmd->execute();
+    }
 }
