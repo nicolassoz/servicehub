@@ -108,7 +108,7 @@ class cliente
     {
         $sql = "SELECT * from clientes where id = :id";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":id", $this->$id);
+        $cmd->bindValue(":id", $this->$id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
