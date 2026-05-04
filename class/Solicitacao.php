@@ -36,7 +36,7 @@ class Solicitacao
         return $this->id;
     }
 
-    private function setID(string $id)
+    public function setID(string $id)
     {
         $this->id = $id;
     }
@@ -46,7 +46,7 @@ class Solicitacao
         return $this->cliente_id;
     }
 
-    private function setClienteId(string $cliente_id)
+    public function setClienteId(string $cliente_id)
     {
         $this->cliente_id = $cliente_id;
     }
@@ -56,7 +56,7 @@ class Solicitacao
         return $this->descricao_problema;
     }
 
-    private function setDescricaoProblema(string $descricao_problema)
+    public function setDescricaoProblema(string $descricao_problema)
     {
         $this->descricao_problema = $descricao_problema;
     }
@@ -66,7 +66,7 @@ class Solicitacao
         return $this->data_preferida;
     }
 
-    private function setDataPreferida(string $data_preferida)
+    public function setDataPreferida(string $data_preferida)
     {
         $this->data_preferida = $data_preferida;
     }
@@ -76,7 +76,7 @@ class Solicitacao
         return $this->status;
     }
 
-    private function seStatus(string $status)
+    public function seStatus(string $status)
     {
         $this->status = $status;
     }
@@ -86,7 +86,7 @@ class Solicitacao
         return $this->data_cad;
     }
 
-    private function setDataCad(string $data_cad)
+    public function setDataCad(string $data_cad)
     {
         $this->data_cad = $data_cad;
     }
@@ -96,7 +96,7 @@ class Solicitacao
         return $this->data_atualizacao;
     }
 
-    private function setDataAtualizacao(string $data_atualizacao)
+    public function setDataAtualizacao(string $data_atualizacao)
     {
         $this->data_atualizacao = $data_atualizacao;
     }
@@ -106,7 +106,7 @@ class Solicitacao
         return $this->data_resposta;
     }
 
-    private function setDataResposta(string $data_resposta)
+    public function setDataResposta(string $data_resposta)
     {
         $this->data_resposta = $data_resposta;
     }
@@ -116,7 +116,7 @@ class Solicitacao
         return $this->resposta_admin;
     }
 
-    private function setRespostaAdmin(string $resposta_admin)
+    public function setRespostaAdmin(string $resposta_admin)
     {
         $this->resposta_admin = $resposta_admin;
     }
@@ -126,7 +126,7 @@ class Solicitacao
         return $this->endereco;
     }
 
-    private function setEndereco(string $endereco)
+    public function setEndereco(string $endereco)
     {
         $this->endereco = $endereco;
     }

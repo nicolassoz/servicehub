@@ -28,7 +28,7 @@ class ServicoSolicitacao
         return $this->servico_id;
     }
 
-    private function setServicoId(int $servico_id)
+    public function setServicoId(int $servico_id)
     {
         $this->servico_id = $servico_id;
     }
@@ -38,7 +38,7 @@ class ServicoSolicitacao
         return $this->solicitacao_id;
     }
 
-    private function setSolicitacaoId(int $solicitacao_id)
+    public function setSolicitacaoId(int $solicitacao_id)
     {
         $this->servico_id = $solicitacao_id;
     }

@@ -30,7 +30,7 @@ class cliente
         return $this->id;
     }
 
-    private function setID(string $id)
+    public function setID(string $id)
     {
         $this->id = $id;
     }
@@ -40,7 +40,7 @@ class cliente
         return $this->usuario_id;
     }
 
-    private function setUsuarioId(string $usuario_id)
+    public function setUsuarioId(string $usuario_id)
     {
         $this->usuario_id = $usuario_id;
     }
@@ -50,7 +50,7 @@ class cliente
         return $this->telefone;
     }
 
-    private function setTelefone(string $telefone)
+    public function setTelefone(string $telefone)
     {
         $this->telefone = $telefone;
     }
@@ -60,7 +60,7 @@ class cliente
         return $this->cpf;
     }
 
-    private function setCpf(string $cpf)
+    public function setCpf(string $cpf)
     {
         $this->cpf = $cpf;
     }
