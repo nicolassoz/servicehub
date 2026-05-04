@@ -1,18 +1,24 @@
 <?php 
-include_once "config/conexao.php";
+session_start();
 
-include "class/ServicoSolicitacao.php";
-include "class/Solicitacao.php";
+include_once "includes/funcoes.php";
 
-include "includes/header.php";
-include "includes/menu.php";
+include_once "class/Solicitacao.php";
+include_once "class/ServicoSolicitacao.php";
 
-$oi = new Solicitacao
+include_once "includes/header.php";
+include_once "includes/menu.php";
+
+
+$servicos_s = new ServicoSolicitacao;
+$solicitacao = new Solicitacao;
 ?>
 <main class="container mt-5">
-  <h3>Solicitação 1</h3>
+  <h3>Solicitação #</h3>
 
   <p><strong>Status:</strong> </p>
+  <p><strong>Data:</strong> </p>
+  <p><strong>Serviços Solicitados:</strong> </p>
   <p><strong>Descrição:</strong> </p>
   <p><strong>Endereço:</strong> </p>
 
