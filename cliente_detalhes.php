@@ -10,11 +10,12 @@ include_once "includes/header.php";
 include_once "includes/menu.php";
 
 
+
 $servicos_s = new ServicoSolicitacao;
 $solicitacao = new Solicitacao;
 ?>
 <main class="container mt-5">
-  <h3>Solicitação #</h3>
+  <h3>Solicitação <strong><?= $_SESSION['id'] ?></h3>
 
   <p><strong>Status:</strong> </p>
   <p><strong>Data:</strong> </p>

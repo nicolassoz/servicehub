@@ -1,6 +1,7 @@
 <?php
 // conexão
 include_once "config/conexao.php";
+include_once "class/ServicoSolicitacao.php";
 
 // codigo para mostrar erro
 ini_set('display_errors',1);
@@ -20,6 +21,7 @@ class Solicitacao
     private $data_resposta;
     private $resposta_admin;
     private $endereco;
+    public $servicos = [];
     private $pdo;
     
 
@@ -36,7 +38,7 @@ class Solicitacao
         return $this->id;
     }
 
-    public function setID(string $id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -181,23 +183,24 @@ class Solicitacao
     // buscar por id
     public function buscarPorId(int $id):bool
     {
-        $sql = "SELECT * from solicitacoes where id = :id";
+        $sql = "SELECT * FROM solicitacoes WHERE id = :id";
         $cmd = obterPdo()->prepare($sql);
         $cmd->bindValue(":id", $id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
-            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->setID($dados['id']);
-            $this->setClienteId($dados['cliente_id']);
-            $this->setDescricaoProblema($dados['descricao_problema']);
-            $this->setDataPreferida($dados['data_preferida']);
-            $this->seStatus($dados['status']);
-            $this->setDataCad($dados['data_cad']);
-            $this->setDataAtualizacao($dados['data_atualizacao']);
-            $this->setDataResposta($dados['data_resposta']);
-            $this->setRespostaAdmin($dados['resposta_admin']);
-            $this->setEndereco($dados['endereco']);
+            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+            $this->id = $dados['id'];
+            $this->cliente_id = $dados['cliente_id'];
+            $this->descricao_problema = $dados['descricao_problema'];
+            $this->data_preferida = $dados['data_preferida'];
+            $this->status =$dados['status'];
+            $this->data_cad =$dados['data_cad'];
+            $this->data_atualizacao = $dados['data_atualizacao'];
+            $this->data_resposta = $dados['data_resposta'];
+            $this->resposta_admin = $dados['resposta_admin'];
+            $this->endereco = $dados['endereco'];
+            $this->servicos = ServicoSolicitacao::listarServicosDaSolicitacao($dados['id']);
             return true;
         }
         

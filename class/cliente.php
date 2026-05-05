@@ -30,7 +30,7 @@ class cliente
         return $this->id;
     }
 
-    public function setID(string $id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -108,12 +108,12 @@ class cliente
     {
         $sql = "SELECT * from clientes where id = :id";
         $cmd = obterPdo()->prepare($sql);
-        $cmd->bindValue(":id", $this->$id, PDO::PARAM_INT);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
-            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->setID($dados['id']);
+            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+            $this->id = $dados["id"];
             $this->setUsuarioId($dados['usuario_id']);
             $this->setTelefone($dados['telefone']);
             $this->setCpf($dados['cpf']);

@@ -22,6 +22,7 @@ include "includes/menu.php";
         <th>ID</th>
         <th>Cliente</th>
         <th>Email</th>
+        <th>Serviços</th>
         <th>Status</th>
         <th>Data</th>
         <th>Ação</th>
@@ -40,12 +41,14 @@ include "includes/menu.php";
               {
                 echo '<span class="badge bg-dark me-1 mb-1">'.$serv.'</span>';
               }
+              // print_r();
+              // die;
             ?>
           </td>
           <td><?= $s['status'] ?></td>
           <td><?= date("d/m/Y H:i", strtotime($s["data_cad"])) ?></td>
           <td>
-            <a href="admin_responder.php?id=" class="btn btn-primary btn-sm">Responder</a>
+            <a href="admin_responder.php?id=<?= $s["id"] ?>" class="btn btn-primary btn-sm">Responder</a>
           </td>
         </tr>
         <?php endforeach;?>

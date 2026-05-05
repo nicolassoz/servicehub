@@ -25,7 +25,7 @@ class Usuario
        return $this->id;
     }
 
-    private function setID(string $id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -137,7 +137,7 @@ class Usuario
         if($cmd->rowCount() > 0)
             {
                 $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-                $this->setID($dados['id']);
+                $this->setId($dados['id']);
                 $this->setNome($dados['nome']);
                 $this->setEmail($dados['email']);
                 $this->setSenha($dados['senha']);
@@ -150,7 +150,7 @@ class Usuario
     }    
 
     // buscar por id
-    public function buscarPorID(int $id):bool
+    public function buscarPorId(int $id):bool
     {
         $sql = "SELECT * FROM usuarios WHERE id = :id";
         $cmd = obterPdo()->prepare($sql);
@@ -159,7 +159,7 @@ class Usuario
         if($cmd->rowCount() > 0)
             {
                 $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-                $this->setID($dados['id']);
+                $this->setId($dados['id']);
                 $this->setNome($dados['nome']);
                 $this->setEmail($dados['email']);
                 $this->setSenha($dados['senha']);

@@ -2,8 +2,8 @@
 session_start();
 
 require_once "config/conexao.php";
-
 require_once "includes/funcoes.php";
+require_once "class/Solicitacao.php";
 
 require_once "class/cliente.php";
 
@@ -32,7 +32,8 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
   $stmt = obterPdo()->prepare($sql);
   // ------ $cmd = obterPdo() -> prepare($sql);
   // executar
-  $stmt->execute([$cliente->getId()]);
+  
+  // $stmt->execute($cliente->getId());
   // ----- $cmd->execute();
 
   $solicitacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,11 +85,9 @@ if(!$cliente->buscarPorId($_SESSION["usuario_id"]))
 
           <td>
             <!-- link para ver os detalhe da solicitações -->
-            <a href="clientes_detalhes.php?id=<?= $s["id"] ?>" class="btn btn-primary btn-sm ">
+            <a href="cliente_detalhes.php?id=<?= $s["id"] ?>" class="btn btn-primary btn-sm ">d</a>
           </td>
-          <td>
-            <a href="cliente_detalhes.php?id=" class="btn btn-primary btn-sm">Detalhes</a>
-          </td>
+          
         </tr>
       <?php endforeach;?>  
     </tbody>
