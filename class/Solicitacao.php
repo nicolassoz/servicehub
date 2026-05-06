@@ -48,7 +48,7 @@ class Solicitacao
         return $this->cliente_id;
     }
 
-    public function setClienteId(string $cliente_id)
+    public function setClienteId(int $cliente_id)
     {
         $this->cliente_id = $cliente_id;
     }
@@ -78,7 +78,7 @@ class Solicitacao
         return $this->status;
     }
 
-    public function seStatus(string $status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }

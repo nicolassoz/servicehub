@@ -68,7 +68,7 @@ class cliente
     // inserir
     public function inserir():bool
     {
-        $sql = "INSERT clientes (usuario_id, telelfone, cpf) VALUES (:usuario_id, :telefone, :cpf)";
+        $sql = "INSERT clientes (usuario_id, telefone, cpf) VALUES (:usuario_id, :telefone, :cpf)";
         $cmd = obterPdo()->prepare($sql);
         $cmd->bindValue(":usuario_id", $this->usuario_id, PDO::PARAM_INT);
         $cmd->bindValue(":telefone", $this->telefone);
@@ -132,11 +132,11 @@ class cliente
         $cmd->execute();
         if($cmd->rowCount() > 0)
         {
-            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            $this->setID($dados['id']);
-            $this->setUsuarioId($dados['usuario_id']);
-            $this->setTelefone($dados['telefone']);
-            $this->setCpf($dados['cpf']);
+            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+            $this->id=$dados['id'];
+            $this->usuario_id=$dados['usuario_id'];
+            $this->telefone=$dados['telefone'];
+            $this->cpf=$dados['cpf'];
             return true;
         }
         

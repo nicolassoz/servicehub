@@ -7,7 +7,7 @@ require_once "class/Solicitacao.php";
 require_once "class/Servico.php";
 require_once "class/ServicoSolicitacao.php";
 
-if ($_SERVER['REQUEST_METHOD'] !== "post")
+if ($_SERVER['REQUEST_METHOD'] !== "POST")
     {
         header("location: contratar.php?erro=invalid Request.");
         exit();
@@ -100,7 +100,7 @@ try
     
 // verificar se o usuário existe
 $usuarioBanco = new Usuario();
-if($usuarioBanco->buscarPorEmail($email))
+if($usuarioBanco->buscarPorEmail($email)==false)
     {
         // se retornou falso é por que não tem usuário com este email no banco
         // entao gravamos!
@@ -142,7 +142,7 @@ $solicitacao = new Solicitacao();
 $solicitacao->setClienteId($cliente_id);
 $solicitacao->setDescricaoProblema($descricao);
 $solicitacao->setDataPreferida($data_preferida ?: null);
-$solicitacao->setClienteId($endereco);
+$solicitacao->setEndereco($endereco);
 
 if(!$solicitacao->inserir())
     {
